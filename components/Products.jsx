@@ -3,6 +3,7 @@ import Card from "./Card";
 
 const Products = () => {
   const [SearchQuery, setSearchQuery] = useState("");
+  const [MainProducts, setMainProducts] = useState([]); // [All Products, Filtered Products
   const [Products, setProducts] = useState([]);
   const [ProductCategory, setProductCategory] = useState([]);
   const [SelectedCategory, setSelectedCategory] = useState("All");
@@ -23,6 +24,7 @@ const Products = () => {
 
       // set products
       setProducts(productData.data.listings);
+      setMainProducts(productData.data.listings);
       setProductCategory(productData.data.categories);
 
       // embed iframe
@@ -30,15 +32,43 @@ const Products = () => {
     })();
   }, []);
 
-  console.log(Products);
+  // search query useEffect
+  useEffect(() => {
+    if (SearchQuery === "") {
+      setProducts(MainProducts);
+      return;
+    }
+    // filter products
+    const filteredProducts = MainProducts?.filter((item) =>
+      item?.product?.title?.toLowerCase().includes(SearchQuery.toLowerCase())
+    );
+
+    // set products
+    setProducts(filteredProducts);
+  }, [SearchQuery]);
+
+  // handle caterggory
+  const handleCategory = (category) => {
+    const { listingIds } = category;
+
+    // lisiting ids have ids of all products so we need to filter products
+    // based on listing ids
+    const filteredProducts = MainProducts?.filter((item) =>
+      listingIds.includes(item?.id)
+    );
+
+    // set products
+    setProducts(filteredProducts);
+  };
 
   return (
     <div className="mt-[24px] h-full w-full px-4">
       {/* search bar with categories */}
       <div>
         <input
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search any product..."
-          className="bg-[#121112] duration-200 focus:border-[#00ff38] focus:placeholder:text-[#00ff38] border border-[#353535] rounded-md p-2 w-full outline-none text-[12px] sm:text-[14px] sm:py-3 text-[#00ff38]"
+          className="bg-[#121112] duration-200 focus:border-[#00ff38] focus:placeholder:text-[#00ff38] border border-[#353535] rounded px-4 p-2 w-full outline-none text-[12px] sm:text-[14px] sm:py-3 text-[#00ff38]"
         />
         {/* caregoreies */}
         {/* Category */}
@@ -46,12 +76,15 @@ const Products = () => {
           {ProductCategory?.map((item, index) => (
             <div
               key={index}
-              onClick={() => setSelectedCategory(item?.name)}
+              onClick={() => {
+                setSelectedCategory(item?.name);
+                handleCategory(item);
+              }}
               className={JoinClasses(
-                item?.name === SelectedCategory
-                  ? " text-[#00ff36]  border-[#00ff36]"
-                  : "hover:text-[#00ff36] hover:border-[#00ff36]",
-                "cursor-pointer text-[12px] text-gray-400 bg-[#121112] w-fit rounded-[4px] border border-[#646464] p-1 px-3 duration-200 "
+                SelectedCategory === item?.name
+                  ? "text-[#00ff36] border-[#00ff36]"
+                  : "hover:text-[#00ff36] hover:border-[#00ff36] text-gray-400 border-[#646464]",
+                "cursor-pointer text-[12px]  bg-[#121112] w-fit rounded-[4px] border  p-1 px-3 duration-200 "
               )}
             >
               {item?.name}
@@ -61,27 +94,15 @@ const Products = () => {
       </div>
       {/* Products */}
       <div className="mt-5 px-4 md:px-0">
-        <button
-          className="p-1.5 px-3 bg-gradient-to-r border border-[#ffffff38] from-[#575656] to-[#2b2a2a] rounded-lg text-sm"
-          data-sellpass-product-path="Safeway-Rewards"
-          data-sellpass-domain="dashncash.sellpass.io"
-        >
-          Purchase
-        </button>
         <div className="text-2xl text-gray-200">{SelectedCategory}</div>
         {/* line */}
         <div className="w-full border-t mt-3 border-gray-600"></div>
         {/* Showing products from here */}
-        <div className="mt-5 w-full grid grid-row grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
+        <div className="mt-5 w-full grid grid-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {Products?.map((item, index) => (
-            <button
-              key={index}
-              className="p-1.5 px-3 bg-gradient-to-r border border-[#ffffff38] from-[#575656] to-[#2b2a2a] rounded-lg text-sm"
-              data-sellpass-product-path={item?.path}
-              data-sellpass-domain="dashncash.sellpass.io"
-            >
-              Purchase
-            </button>
+            <div key={index}>
+              <Card {...item} />
+            </div>
           ))}
         </div>
       </div>

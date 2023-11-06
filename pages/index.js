@@ -2,10 +2,7 @@ import Image from "next/image";
 import Leaves from "../components/Leaves";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
-import Products from "../components/Products";
-import Script from "next/script";
-import Head from "next/head";
-
+import Products from "../components/Products"; 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#000000] text-white">

@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-const Card = ({ path, product }) => {
+const Card = ({ path, product, minPriceDetails }) => {
   return (
     <div
       draggable="false"
-      className="p-4 h-full rounded-lg bg-[#121112] border border-[#282c34] hover:border-[#93969e] flex flex-col gap-y-4 select-none justify-between pointer-events-auto"
+      className="h-full bg-[#121112] group border border-[#282c34] hover:border-[#00ff33] flex flex-col gap-y-2 select-none justify-between pointer-events-auto duration-200"
     >
       {/* Product Image */}
       <div className="w-full h-[140px] ">
@@ -20,18 +20,20 @@ const Card = ({ path, product }) => {
           alt="Product Image"
         />
       </div>
-      {/* Product Title */}
-      <div className="text-lg product-title">{product?.title}</div>
-      {/* price and buy Button */}
-      <div className="flex w-full flex-row items-center justify-between">
-        <div className="text-[#919090]">{`Starting @ 0.00 $`}</div>
-        <button
-          className="p-1.5 px-3 bg-gradient-to-r border border-[#ffffff38] from-[#575656] to-[#2b2a2a] rounded-lg text-sm"
-          data-sellpass-product-path={`${path}`}
-          data-sellpass-domain="dashncash.sellpass.io"
-        >
-          Purchase
-        </button>
+      <div className="flex flex-col gap-y-4 p-2">
+        {/* Product Title */}
+        <div className="text-lg product-title">{product?.title}</div>
+        {/* price and buy Button */}
+        <div className="flex w-full flex-row items-center justify-between">
+          <div className="text-[#919090] text-sm">{`Starting @${minPriceDetails.amount} USD`}</div>
+          <button
+            className="p-1.5 px-3 bg-gradient-to-r from-[#575656] to-[#2b2a2a] text-sm group-hover:from-[#00ff33] group-hover:to-[#357c3a] duration-100"
+            data-sellpass-product-path={`${path}`}
+            data-sellpass-domain="dashncash.sellpass.io"
+          >
+            Purchase
+          </button>
+        </div>
       </div>
     </div>
   );

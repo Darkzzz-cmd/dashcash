@@ -21,3 +21,19 @@ export const TELEGRAM_ICON = () => {
     </svg>
   );
 };
+
+export const BUY_ICON = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18px"
+      height="18px"
+      viewBox="0 0 32 32" 
+    >
+      <path
+        d="M27.857 27.864A3 3 0 0 1 24.861 31H7.139a3 3 0 0 1-2.997-3.136l.815-17.909A1 1 0 0 1 5.956 9h20.089a1 1 0 0 1 .999.955l.813 17.909zM16.185 1.003A6 6 0 0 0 10 7v1h2V7a4 4 0 0 1 8 0v1h2v-.748c0-3.286-2.532-6.151-5.815-6.249z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
