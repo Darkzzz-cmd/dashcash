@@ -7,9 +7,16 @@ const Products = () => {
   const [Products, setProducts] = useState([]);
   const [ProductCategory, setProductCategory] = useState([]);
   const [SelectedCategory, setSelectedCategory] = useState("All");
+  const [SearchedProducts, setSearchedProducts] = useState(null);
+  const [isSearchBarModalOpen, setIsSearchBarModalOpen] = useState(false);
+
+  useEffect(() =>
+    // embed iframe
+    {
+      embedIframe();
+    }, [MainProducts]);
 
   useEffect(() => {
-    // embed iframe
     // fetch data from api
     (async () => {
       const productResponse = await fetch(
@@ -26,9 +33,6 @@ const Products = () => {
       setProducts(productData.data.listings);
       setMainProducts(productData.data.listings);
       setProductCategory(productData.data.categories);
-
-      // embed iframe
-      embedIframe();
     })();
   }, []);
 
@@ -36,6 +40,7 @@ const Products = () => {
   useEffect(() => {
     if (SearchQuery === "") {
       setProducts(MainProducts);
+      setSearchedProducts(null);
       return;
     }
     // filter products
@@ -45,6 +50,7 @@ const Products = () => {
 
     // set products
     setProducts(filteredProducts);
+    setSearchedProducts(filteredProducts);
   }, [SearchQuery]);
 
   // handle caterggory
@@ -65,11 +71,38 @@ const Products = () => {
     <div className="mt-[24px] h-full w-full px-4">
       {/* search bar with categories */}
       <div>
-        <input
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search any product..."
-          className="bg-[#121112] duration-200 focus:border-[#00ff38] focus:placeholder:text-[#00ff38] border border-[#353535] rounded px-4 p-2 w-full outline-none text-[12px] sm:text-[14px] sm:py-3 text-[#00ff38]"
-        />
+        {/* search bar */}
+        <div className="relative">
+          <input
+            value={SearchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setIsSearchBarModalOpen(true);
+            }}
+            placeholder="Search any product..."
+            className="bg-[#121112] duration-200 focus:border-[#00ff38] focus:placeholder:text-[#00ff38] border border-[#353535] px-4 p-2 w-full outline-none text-[12px] sm:text-[14px] sm:py-3 text-[#00ff38]"
+          />
+          {/* showing below items of searched */}
+          <div
+            className={JoinClasses(
+              isSearchBarModalOpen ? "flex flex-col" : "hidden",
+              "w-full absolute bg-[#121112e3] border-t border-l border-r border-[#353535] z-10"
+            )}
+          >
+            {SearchedProducts?.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  setSearchQuery(item?.product?.title);
+                  setIsSearchBarModalOpen(false);
+                }}
+                className="px-[14px] py-2 text-sm cursor-pointer border-b-[1px] border-[#353535]"
+              >
+                {item?.product?.title}
+              </div>
+            ))}
+          </div>
+        </div>
         {/* caregoreies */}
         {/* Category */}
         <div className="mt-4 flex items-row gap-3 w-full justify-center select-none flex-wrap">
@@ -93,7 +126,7 @@ const Products = () => {
         </div>
       </div>
       {/* Products */}
-      <div className="mt-5 px-4 md:px-0">
+      <div className="mt-5 md:px-0">
         <div className="text-2xl text-gray-200">{SelectedCategory}</div>
         {/* line */}
         <div className="w-full border-t mt-3 border-gray-600"></div>
