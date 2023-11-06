@@ -28,6 +28,9 @@ a {
   width: max-content;
 }
 
+.textwrapping{
+  text-wrap: wrap;
+}
 /* leaf animations */
 
 #leaves {

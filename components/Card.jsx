@@ -20,14 +20,14 @@ const Card = ({ path, product, minPriceDetails }) => {
           alt="Product Image"
         />
       </div>
-      <div className="flex flex-col gap-y-4 w-full items-center">
+      <div className="flex flex-col gap-y-4 items-center">
         {/* Product Title */}
-        <div className="text-lg product-title text-center w-full font-semibold">
+        <div className="text-lg w-full product-title text-center font-semibold">
           {product?.title}
         </div>
         {/* price and buy Button */}
         <div className="flex w-full flex-row items-center justify-between">
-          <div className="text-[#919090] text-sm">{`Starting @ ${minPriceDetails.amount} $`}</div>
+          <div className="text-[#919090] text-sm ">{`Starting @ ${minPriceDetails.amount} $`}</div>
           <button
             // className="p-1.5 px-3 bg-gradient-to-r from-[#575656] to-[#2b2a2a] text-sm group-hover:from-[#00ff33] group-hover:to-[#357c3a] duration-100"
             className="p-1.5 px-3 group-hover:bg-[#00ff33] bg-[#575656] group-hover:text-[#121112] text-white font-medium text-sm rounded-sm duration-200"

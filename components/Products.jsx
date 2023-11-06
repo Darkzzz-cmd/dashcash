@@ -96,7 +96,7 @@ const Products = () => {
                   setSearchQuery(item?.product?.title);
                   setIsSearchBarModalOpen(false);
                 }}
-                className="px-[14px] py-2 text-sm cursor-pointer border-b-[1px] border-[#353535]"
+                className="px-[14px] py-2 text-sm cursor-pointer border-b-[1px] border-[#353535] hover:bg-[#00ff3781]"
               >
                 {item?.product?.title}
               </div>
