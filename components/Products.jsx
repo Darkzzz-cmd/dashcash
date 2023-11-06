@@ -8,8 +8,9 @@ const Products = () => {
   const [SelectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
+    // embed iframe
+    // fetch data from api
     (async () => {
-      // fetch data from api
       const productResponse = await fetch(
         "https://api.sellpass.io/v2/public/shops/dashncash.sellpass.io/listings",
         {
@@ -23,6 +24,9 @@ const Products = () => {
       // set products
       setProducts(productData.data.listings);
       setProductCategory(productData.data.categories);
+
+      // embed iframe
+      embedIframe();
     })();
   }, []);
 

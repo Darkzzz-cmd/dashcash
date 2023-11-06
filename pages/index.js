@@ -3,6 +3,8 @@ import Leaves from "../components/Leaves";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import Products from "../components/Products";
+import Script from "next/script";
+import Head from "next/head";
 
 export default function Home() {
   return (
@@ -21,7 +23,7 @@ export default function Home() {
 
       <div className="max-w-[1300px] w-full mx-auto z-[99] relative ">
         <Header />
-        <Banner /> 
+        <Banner />
         <Products />
       </div>
     </div>
