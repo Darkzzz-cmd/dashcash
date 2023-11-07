@@ -36,7 +36,7 @@ a {
 
 #leaves {
   position: absolute;
-  top: -50px;
+  top: -80px;
   width: 100%;
   text-align: right;
 }
@@ -59,9 +59,6 @@ a {
 }
 #leaves i:nth-of-type(3n) {
   animation: falling3 5s infinite;
-}
-#leaves i:nth-of-type(4n) {
-  animation: falling4 5s infinite;
 }
 
 #leaves i:before {
@@ -191,6 +188,7 @@ a {
 }
 
 /* Repeat the above pattern for additional n values up to 40 */
+/*
 #leaves i:nth-of-type(16n) {
   -webkit-animation-delay: 1.6s;
 }
@@ -266,7 +264,7 @@ a {
 #leaves i:nth-of-type(40n) {
   -webkit-animation-delay: 2s;
 }
-
+*/
 #leaves i:nth-of-type(n) {
   background: linear-gradient(to bottom right, #309900, #005600);
 }
@@ -301,40 +299,29 @@ a {
   }
 
   100% {
-    transform: translate3d(0, 1080px, 0) rotate(90deg);
+    transform: translate3d(-650px, 1080px, 0) rotate(150deg);
     opacity: 0;
   }
 }
 
 @keyframes falling3 {
   0% {
-    transform: translate3d(-630px, 0, 0) rotate(-20deg);
+    transform: translate3d(0, 0, 0) rotate(-20deg);
   }
 
   100% {
-    transform: translate3d(0px, 1080px, 0) rotate(-70deg);
+    transform: translate3d(-330px, 1080px, 0) rotate(-70deg);
     opacity: 0;
   }
 }
 
 @keyframes falling2 {
   0% {
-    transform: translate3d(-1000px, 0, 0) rotate(90deg);
+    transform: translate3d(0, 0, 0) rotate(90deg);
   }
 
   100% {
-    transform: translate3d(0px, 1080px, 0) rotate(0deg);
-    opacity: 0;
-  }
-}
-
-@keyframes falling4 {
-  0% {
-    transform: translate3d(-1300px, 0, 0) rotate(90deg);
-  }
-
-  100% {
-    transform: translate3d(0px, 1080px, 0) rotate(0deg);
+    transform: translate3d(-800px, 1080px, 0) rotate(20deg);
     opacity: 0;
   }
 }
