@@ -10,11 +10,11 @@ const Products = () => {
   const [SearchedProducts, setSearchedProducts] = useState(null);
   const [isSearchBarModalOpen, setIsSearchBarModalOpen] = useState(false);
 
-  useEffect(() =>
-    // embed iframe
-    {
-      embedIframe();
-    }, [MainProducts]);
+  // useEffect(() =>
+  //   // embed iframe
+  //   {
+  //     embedIframe();
+  //   }, [MainProducts, SearchQuery, SelectedCategory]);
 
   useEffect(() => {
     // fetch data from api
@@ -133,9 +133,7 @@ const Products = () => {
         {/* Showing products from here */}
         <div className="mt-5 w-full grid grid-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {Products?.map((item, index) => (
-            <div key={index}>
-              <Card {...item} />
-            </div>
+            <Card key={item?.id} {...item} />
           ))}
         </div>
       </div>
@@ -149,3 +147,50 @@ export default Products;
 const JoinClasses = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
+
+// const embedIframe = () => {
+//   const buttons = document.querySelectorAll("[data-sellpass-product-path]");
+//   const modal = document.createElement("div");
+//   const backdrop = document.createElement("div");
+//   const spinner = document.createElement("div");
+//   // const styleNode = document.createElement("style");
+//   const iframe = document.createElement("iframe");
+//   const iframeWrapper = document.createElement("div");
+//   // styleNode.innerText = sellpassCss;
+//   modal.classList.add("sellpass-modal");
+//   iframeWrapper.classList.add("sellpass-iframe-wrapper");
+//   iframe.classList.add("sellpass-iframe");
+//   backdrop.classList.add("sellpass-iframe-backdrop");
+//   spinner.classList.add("sellpass-spinner");
+//   spinner.innerHTML = "<div></div><div></div><div></div><div></div>";
+//   buttons.forEach((elem) => {
+//     const productId = elem.dataset.sellpassProductPath;
+//     const shopHost = elem.dataset.sellpassDomain;
+//     modal.appendChild(backdrop);
+//     modal.appendChild(iframeWrapper);
+//     // modal.appendChild(styleNode);
+//     elem.addEventListener("click", () => {
+//       iframe.setAttribute(
+//         "src",
+//         `https://${shopHost}/embed/products/${productId}`
+//       );
+//       iframeWrapper.appendChild(iframe);
+//       modal.appendChild(spinner);
+//       modal.style.display = "block";
+//       document.body.appendChild(modal);
+//       iframe.onload = () => {
+//         setTimeout(() => {
+//           modal.removeChild(spinner);
+//           iframeWrapper.classList.add("show");
+//         }, 1000);
+//       };
+//     });
+//   });
+//   window.addEventListener("message", (event) => {
+//     if (event.data === "close-embed") {
+//       // document.body.removeChild(modal);
+//       modal.style.display = "none";
+//       iframeWrapper.classList.remove("show");
+//     }
+//   });
+// };

@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   return (
     <div>
       <Head>
-        <script src="https://embed.sellpass.io/embed.js" defer /> 
+        {/* <script src="https://embed.sellpass.io/embed.js" defer />  */}
       </Head>
 
       <Component {...pageProps} />

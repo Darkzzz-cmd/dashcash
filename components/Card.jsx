@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 
 const Card = ({ path, product, minPriceDetails }) => {
+  const productRef = React.useRef(null);
+
   return (
     <div
       draggable="false"
@@ -27,9 +29,10 @@ const Card = ({ path, product, minPriceDetails }) => {
         </div>
         {/* price and buy Button */}
         <div className="flex w-full flex-row items-center justify-between">
-          <div className="text-[#919090] text-sm ">{`Starting @ ${minPriceDetails.amount} $`}</div>
+          <div className="text-[#919090] group-hover:text-[#00ff33] text-sm font-semibold duration-200">{`Starting @ $${minPriceDetails.amount}`}</div>
           <button
-            // className="p-1.5 px-3 bg-gradient-to-r from-[#575656] to-[#2b2a2a] text-sm group-hover:from-[#00ff33] group-hover:to-[#357c3a] duration-100"
+            ref={productRef}
+            onClick={() => embedSellpass(productRef.current)}
             className="p-1.5 px-3 group-hover:bg-[#00ff33] bg-[#575656] group-hover:text-[#121112] text-white font-medium text-sm rounded-sm duration-200"
             data-sellpass-product-path={`${path}`}
             data-sellpass-domain="dashncash.sellpass.io"
@@ -43,3 +46,44 @@ const Card = ({ path, product, minPriceDetails }) => {
 };
 
 export default Card;
+
+const embedSellpass = (elementRef) => {
+  const modal = document.createElement("div");
+  const backdrop = document.createElement("div");
+  const spinner = document.createElement("div");
+  const iframe = document.createElement("iframe");
+  const iframeWrapper = document.createElement("div");
+  modal.classList.add("sellpass-modal");
+  iframeWrapper.classList.add("sellpass-iframe-wrapper");
+  iframe.classList.add("sellpass-iframe");
+  backdrop.classList.add("sellpass-iframe-backdrop");
+  spinner.classList.add("sellpass-spinner");
+  spinner.innerHTML = "<div></div><div></div><div></div><div></div>";
+  // element
+  const productId = elementRef.dataset.sellpassProductPath;
+  const shopHost = elementRef.dataset.sellpassDomain;
+  modal.appendChild(backdrop);
+  modal.appendChild(iframeWrapper);
+  // modal.appendChild(styleNode);
+
+  iframe.setAttribute("src", `https://${shopHost}/embed/products/${productId}`);
+  iframeWrapper.appendChild(iframe);
+  modal.appendChild(spinner);
+  document.body.appendChild(modal);
+  iframe.onload = () => {
+    setTimeout(() => {
+      modal.removeChild(spinner);
+      iframeWrapper.classList.add("show");
+    }, 1000);
+  };
+  // close modal
+  window.addEventListener("message", (event) => {
+    if (event.data === "close-embed") {
+      // find document with class .sellpass-modal and remove it from node
+      if (modal && document.body.contains(modal)) {
+        document?.body?.removeChild(modal);
+      }
+      iframeWrapper.classList.remove("show");
+    }
+  });
+};
