@@ -8,7 +8,7 @@ export default function Home() {
     <div className="relative min-h-screen bg-[#000000] text-white">
       {/* bg image */}
       <Image
-        className="fixed w-full h-full object-cover opacity-[0.05] z-0 top-0 left-0"
+        className="fixed w-full h-full object-cover opacity-[0.08] z-0 top-0 left-0"
         alt="background image"
         src={"/wallpaper.jpg"}
         draggable={false}
