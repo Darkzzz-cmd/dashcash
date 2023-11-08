@@ -103,7 +103,7 @@ const Products = () => {
                 }}
                 className="px-[14px] py-2 text-sm cursor-pointer border-b-[1px] border-[#353535] hover:bg-[#00ff3781]"
               >
-                {item?.product?.title}
+                {getFilteredText(item?.product?.title, SearchQuery)}
               </div>
             ))}
           </div>
@@ -153,49 +153,17 @@ const JoinClasses = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
 
-// const embedIframe = () => {
-//   const buttons = document.querySelectorAll("[data-sellpass-product-path]");
-//   const modal = document.createElement("div");
-//   const backdrop = document.createElement("div");
-//   const spinner = document.createElement("div");
-//   // const styleNode = document.createElement("style");
-//   const iframe = document.createElement("iframe");
-//   const iframeWrapper = document.createElement("div");
-//   // styleNode.innerText = sellpassCss;
-//   modal.classList.add("sellpass-modal");
-//   iframeWrapper.classList.add("sellpass-iframe-wrapper");
-//   iframe.classList.add("sellpass-iframe");
-//   backdrop.classList.add("sellpass-iframe-backdrop");
-//   spinner.classList.add("sellpass-spinner");
-//   spinner.innerHTML = "<div></div><div></div><div></div><div></div>";
-//   buttons.forEach((elem) => {
-//     const productId = elem.dataset.sellpassProductPath;
-//     const shopHost = elem.dataset.sellpassDomain;
-//     modal.appendChild(backdrop);
-//     modal.appendChild(iframeWrapper);
-//     // modal.appendChild(styleNode);
-//     elem.addEventListener("click", () => {
-//       iframe.setAttribute(
-//         "src",
-//         `https://${shopHost}/embed/products/${productId}`
-//       );
-//       iframeWrapper.appendChild(iframe);
-//       modal.appendChild(spinner);
-//       modal.style.display = "block";
-//       document.body.appendChild(modal);
-//       iframe.onload = () => {
-//         setTimeout(() => {
-//           modal.removeChild(spinner);
-//           iframeWrapper.classList.add("show");
-//         }, 1000);
-//       };
-//     });
-//   });
-//   window.addEventListener("message", (event) => {
-//     if (event.data === "close-embed") {
-//       // document.body.removeChild(modal);
-//       modal.style.display = "none";
-//       iframeWrapper.classList.remove("show");
-//     }
-//   });
-// };
+const getFilteredText = (text, searchQuery) => {
+  // find the index of search query in text value and change that text to green
+  const index = text?.toLowerCase().indexOf(searchQuery?.toLowerCase());
+  const firstPart = text?.slice(0, index);
+  const secondPart = text?.slice(index, index + searchQuery?.length);
+  const thirdPart = text?.slice(index + searchQuery?.length);
+  return (
+    <div>
+      {firstPart}
+      <span className="text-[#00ff36] font-semibold">{secondPart}</span>
+      {thirdPart}
+    </div>
+  );
+};
