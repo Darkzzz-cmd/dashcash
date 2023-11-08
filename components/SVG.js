@@ -1,7 +1,6 @@
 export const TELEGRAM_ICON = () => {
   return (
     <svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1">
-      <title>telegram_fill</title>
       <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Brand" transform="translate(-672.000000, -48.000000)">
           <g transform="translate(672.000000, 48.000000)">

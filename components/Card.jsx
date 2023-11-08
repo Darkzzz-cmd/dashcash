@@ -29,11 +29,14 @@ const Card = ({ path, product, minPriceDetails }) => {
         </div>
         {/* price and buy Button */}
         <div className="flex w-full flex-row items-center justify-between">
-          <div className="text-[#919090] sm:group-hover:text-[#00ff33] text-sm font-semibold duration-200">{`Starting @ $${minPriceDetails.amount}`}</div>
+          <div className="text-[#919090] text-sm duration-200">
+            <span>{`Starting @ `}</span>
+            <span className="font-semibold text-[#00ff33]">{`$${minPriceDetails.amount}`}</span>
+          </div>
           <button
             ref={productRef}
             onClick={() => embedSellpass(productRef.current)}
-            className="p-1.5 px-3 sm:group-hover:border-[#00ff33] sm:group-hover:from-[#4c9155] sm:group-hover:to-[#00ff33f8] bg-gradient-to-r border border-[#ffffff38] from-[#575656] to-[#2b2a2a] rounded-lg text-sm duration-200"
+            className="p-1.5 px-3 sm:group-hover:border-[#00ff33] sm:group-hover:from-[#4c9155] sm:group-hover:to-[#00ff33f8] bg-gradient-to-r border border-[#ffffff38] from-[#575656] to-[#2b2a2a] rounded-lg text-sm "
             data-sellpass-product-path={`${path}`}
             data-sellpass-domain="dashncash.sellpass.io"
           >
