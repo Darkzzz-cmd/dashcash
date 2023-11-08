@@ -29,8 +29,8 @@ const Card = ({ path, product, minPriceDetails }) => {
         </div>
         {/* price and buy Button */}
         <div className="flex w-full flex-row items-center justify-between">
-          <div className="text-[#919090] text-sm duration-200">
-            <span>{`Starting @ `}</span>
+          <div>
+            <span className="text-sm text-[#919090]">{`Starting at: `}</span>
             <span className="font-semibold text-[#00ff33]">{`$${minPriceDetails.amount}`}</span>
           </div>
           <button

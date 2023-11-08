@@ -43,6 +43,11 @@ const Products = () => {
       setSearchedProducts(null);
       return;
     }
+    if (SearchQuery === " ") {
+      setProducts(MainProducts);
+      setSearchedProducts(null);
+      return;
+    }
     // filter products
     const filteredProducts = MainProducts?.filter((item) =>
       item?.product?.title?.toLowerCase().includes(SearchQuery.toLowerCase())
