@@ -19,7 +19,7 @@ const Header = () => {
       </div>
       {/* Join Telegram  */}
       <div className="flex flex-row items-center">
-        <div className="hidden sm:flex py-[8px] px-4 border border-transparent flex items-center justify-center rounded-md h-fit gap-2 cursor-pointer hover:border-[#27ff29] hover:text-[#27ff29] duration-200">
+        <div className="hidden sm:flex py-[8px] px-4 border border-transparent items-center justify-center rounded-md h-fit gap-2 cursor-pointer hover:border-[#27ff29] hover:text-[#27ff29] duration-200">
           <div className="text-sm">Home</div>
         </div>
         <Link href="https://t.me/dcashsupport">

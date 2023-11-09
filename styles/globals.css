@@ -23,6 +23,24 @@ a {
   text-decoration: none;
 }
 
+body::-webkit-scrollbar {
+  width: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  border-color: #00ff33;
+  background-color: #000000;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #00ff33;
+  cursor: pointer;
+  margin-right: 5px;
+  height: 10px;
+}
+
 .product-title {
   background: url("https://i.ibb.co/HTXybWx/zTF1Pzd.gif");
   /* add filter for changing its color */
