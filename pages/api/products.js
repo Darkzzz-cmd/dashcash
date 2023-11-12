@@ -2,7 +2,7 @@
 
 export default async function handler(req, res) {
   const productResponse = await fetch(
-    "https://api.sellpass.io/v2/public/shops/dashncash.sellpass.io/listings",
+    `https://api.sellpass.io/v2/public/shops/dashncash.sellpass.io/listings?time=${Date.now()}`,
     {
       method: "GET",
       cache: "no-store",

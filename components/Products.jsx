@@ -10,20 +10,17 @@ const Products = () => {
   const [SearchedProducts, setSearchedProducts] = useState(null);
   const [isSearchBarModalOpen, setIsSearchBarModalOpen] = useState(false);
 
-  // useEffect(() =>
-  //   // embed iframe
-  //   {
-  //     embedIframe();
-  //   }, [MainProducts, SearchQuery, SelectedCategory]);
-
   useEffect(() => {
     // fetch data from api
     (async () => {
       const productResponse = await fetch(
-        "/api/products",
+        `https://api.sellpass.io/v2/public/shops/dashncash.sellpass.io/listings?time=${Date.now()}`,
         {
           method: "GET",
-          cache: "no-store",
+          cache: "no-cache",
+          next: {
+            revalidate: 0,
+          },
         }
       );
 
@@ -168,3 +165,7 @@ const getFilteredText = (text, searchQuery) => {
     </div>
   );
 };
+
+export const fetchCache = "force-no-store";
+export const revalidate = 0; // seconds
+export const dynamic = "force-dynamic";
