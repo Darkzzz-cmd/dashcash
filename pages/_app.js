@@ -6,6 +6,11 @@ import Link from "next/link";
 export default function App({ Component, pageProps }) {
   return (
     <div className="relative">
+      <script
+        async
+        src="https://myumami-tau.vercel.app/script.js"
+        data-website-id="8b2826cc-e4e8-4893-9b99-90fedcb85f37"
+      ></script>
       <Head>
         <title>Dash & Cash Shop</title>
         {/* page favion png */}
