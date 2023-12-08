@@ -972,3 +972,7 @@ body::-webkit-scrollbar-thumb {
   }
 }
 /* Stars Background */
+
+.annouce_text_shadow {
+  text-shadow: 1px 1px 6px #000000;
+}

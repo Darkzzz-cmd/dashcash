@@ -2,10 +2,12 @@ import Header from "../components/Header";
 import Banner from "../components/Banner";
 import Products from "../components/Products";
 import Footer from "../components/Footer";
+import Annoucement from "../components/Annoucement";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#000000] text-white">
+      <Annoucement />
       <div className="stars-background small-stars"></div>
       <div className="stars-background medium-stars"></div>
       <div className="stars-background big-stars"></div>

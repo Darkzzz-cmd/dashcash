@@ -14,7 +14,7 @@ const Products = () => {
     // fetch data from api
     (async () => {
       const productResponse = await fetch(
-        `https://api.sellpass.io/v2/public/shops/dashncash.sellpass.io/listings?time=${Date.now()}`,
+        `/api/products`,
         {
           method: "GET",
           cache: "no-cache",
